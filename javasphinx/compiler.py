@@ -95,6 +95,8 @@ class JavadocRestCompiler(object):
         #    product = doc.tags['cms.product']
         product = 'MPI'
 
+        # Debug - simplest possible output
+        print('Adding simple fixed meta strings')
         output.add_line('.. meta::')
         output.add_line('    :product: %s' % product)
 
