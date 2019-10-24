@@ -90,15 +90,43 @@ class JavadocRestCompiler(object):
             see_also = ', '.join(self.__output_see(see) for see in doc.tags['see'])
             output.add_line('**See also:** %s' % (see_also,))
 
+        product = " "
+        group = " "
+        audience = " "
+        info_type = " "
+
         # Adding cms tags for 3di CMS
-        # if doc.tags.get('cms.product'):
-        #    product = doc.tags['cms.product']
-        product = 'MPI'
+        if doc.tags.get('cms.product'):
+            product = doc.tags['cms.product']
+            print("Found product: %s" % product)
+
+        if doc.tags.get('cms.group'):
+            group = doc.tags['cms.group']
+            print("Found group: %s" % group)
+
+        if doc.tags.get('cms.audience'):
+            audience = doc.tags['cms.audience']
+            print("Found audience: %s" % audience)
+
+        if doc.tags.get('cms.infotype'):
+            info_type = doc.tags['cms.infotype']
+            print("Found info type: %s" % info_type)
+
+        if doc.tags.get('cms.documentid'):
+            document_id = doc.tags['cms.documentid']
+            print("Found doc id: %s" % document_id)
+
+            output.add_line('')
+            output.add_line('.. meta::')
+            output.add_line('    :product: %s' % product[0])
+            output.add_line('    :documentid: %s' % document_id[0])
+            output.add_line('    :group: %s' % group[0])
+            output.add_line('    :audience: %s' % audience[0])
+            output.add_line('    :info_type: %s' % info_type[0])
+            output.add_line('')
 
         # Debug - simplest possible output
-        print('Adding simple fixed meta strings')
-        output.add_line('.. meta::')
-        output.add_line('    :product: %s' % product)
+        #print('Adding simple fixed meta strings')
 
         return output
 
