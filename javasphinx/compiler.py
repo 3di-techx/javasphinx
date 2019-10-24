@@ -90,11 +90,13 @@ class JavadocRestCompiler(object):
             see_also = ', '.join(self.__output_see(see) for see in doc.tags['see'])
             output.add_line('**See also:** %s' % (see_also,))
 
-        if doc.tags.get('cms.product'):
-            product = doc.tags['cms.product']
+        # Adding cms tags for 3di CMS
+        # if doc.tags.get('cms.product'):
+        #    product = doc.tags['cms.product']
+        product = 'MPI'
 
-            output.add_line('.. meta::')
-            output.add_line('    :product: %s' % product)
+        output.add_line('.. meta::')
+        output.add_line('    :product: %s' % product)
 
         return output
 
